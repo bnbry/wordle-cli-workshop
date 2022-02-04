@@ -30,3 +30,8 @@
 - word must be in the list of words
 - player can retry as many times as possible on invalid words
 - player limited to retry 6 times on valid word failures
+
+### Enrich guessing/matching feedback
+
+- display guess with colors if a letter matches
+- extract and clean up code a bit
