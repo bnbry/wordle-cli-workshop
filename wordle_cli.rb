@@ -18,20 +18,28 @@ class WordleCLI < Thor
   ]
 
   desc "go", "start a wordle game"
+  option :words, :type => :string
+  option :w, :type => :string
+  long_desc <<-LONGDESC
+    This lets you play a cool game of wordle kind of
+
+    With -w, --words option, wordle go -w="path/to/file.txt" lets you load an external words list
+  LONGDESC
   def go
+    wordlist = parse_wordlist(options) || WORDS
     say "Welcome to wordle! Guess a word."
-    answer = WORDS.sample
+    answer = wordlist.sample
     playing = true
     valid_guesses = 1
 
     while playing do
-      guess = ask("What is your guess?(#{valid_guesses}/6)(hint: it is #{answer})")
+      guess = ask("What is your guess?(#{valid_guesses}/6)")
         .upcase
         .then do |raw_guess|
           ::WordleApp::EnrichedGuess.new(
             guess:           raw_guess,
             answer:          answer,
-            valid_words:     WORDS,
+            valid_words:     wordlist,
             letter_renderer: ->(letter) { set_color(*letter) }
           )
         end
@@ -56,5 +64,15 @@ class WordleCLI < Thor
         playing = false
       end
     end
+  end
+
+  private
+
+  def parse_wordlist(options)
+    filepath = options[:w] || options[:words]
+
+    return unless filepath
+
+    File.readlines(filepath).map { |word| word.upcase.slice(0..5).delete("\n") }
   end
 end

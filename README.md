@@ -35,3 +35,15 @@
 
 - display guess with colors if a letter matches
 - extract and clean up code a bit
+
+### Add options to pass in dictionary
+
+- dictionary file
+- document options and accept them with fallback
+- file parsing
+
+### Maybe clean this up!
+
+- clean up code
+- show all letters and their current status
+- add specs?
