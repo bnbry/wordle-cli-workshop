@@ -29,4 +29,4 @@
 
 - word must be in the list of words
 - player can retry as many times as possible on invalid words
-- player limited to retry 5 times on valid word failures
+- player limited to retry 6 times on valid word failures

@@ -5,32 +5,39 @@ class WordleCLI < Thor
     "HELLO",
     "ROBOT",
     "PANTS",
+    "SHARK",
+    "CODES",
+    "SPIFF",
+    "WORDS",
   ]
-
-  desc "hello NAME", "say hello to NAME"
-  def hello(name)
-    puts "Hello #{name}"
-  end
 
   desc "go", "start a wordle game"
   def go
     say "Welcome to wordle! Guess a word."
     answer = WORDS.sample
     playing = true
+    valid_guesses = 0
 
     while playing do
       guess = ask("What is your guess?(hint: it is #{answer})").upcase
 
-      if valid_guess?(guess)
-        if guess == answer
-          say "you win!"
+      if valid_guesses <= 5
+        if valid_guess?(guess)
+          if guess == answer
+            say "you win!"
+            playing = false
+          else
+            say "not the right word!"
+            playing = true
+            valid_guesses += 1
+          end
         else
-          say "you lose!"
+          say "invalid guess, try again"
+          playing = true
         end
-        playing = false
       else
-        say "invalid guess, try again"
-        playing = true
+        say "out of guesses, you lose!"
+        playing = false
       end
     end
   end
