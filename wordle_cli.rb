@@ -17,12 +17,22 @@ class WordleCLI < Thor
     say "Welcome to wordle! Guess a word."
 
     answer = WORDS.sample
-    guess = ask "What is your guess?(hint: it is #{answer})"
+    guess = ask("What is your guess?(hint: it is #{answer})").upcase
 
-    if guess.upcase == answer
-      say "you win!"
+    if valid_guess?(guess)
+      if guess == answer
+        say "you win!"
+      else
+        say "you lose!"
+      end
     else
-      say "you lose!"
+      say "invalid guess, try again"
     end
+  end
+
+  private
+
+  def valid_guess?(guess)
+    WORDS.include?(guess)
   end
 end
