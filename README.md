@@ -24,3 +24,9 @@
 - set up a basic dictionary
 - change the wordle CLI to take guesses using say/ask
 - show results
+
+### add constraints!
+
+- word must be in the list of words
+- player can retry as many times as possible on invalid words
+- player limited to retry 5 times on valid word failures
