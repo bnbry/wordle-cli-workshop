@@ -18,3 +18,9 @@
 - `bin/wordle`
 - `bin/wordle help hello`
 - `bin/wordle hello world`
+
+### guess words!
+
+- set up a basic dictionary
+- change the wordle CLI to take guesses using say/ask
+- show results
